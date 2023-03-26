@@ -1,4 +1,5 @@
 <?php
+
 $host = 'localhost';
 $data = 'publications';
 $user = 'root';

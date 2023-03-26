@@ -1,11 +1,10 @@
 <?php
+
 require_once 'login.php';
 
 try {
     $pdo = new PDO($attr, $user, $pass, $opts);
-}
-catch (PDOException $e)
-{
+} catch (PDOException $e) {
     throw new PDOException($e->getMessage(), (int)$e->getCode());
 }
 
@@ -36,11 +35,11 @@ $result = $pdo->query($query);
 
 echo "<table><tr><th>Column</th><th>Type</th><th>Null</th><th>Key</th></tr>";
 
-while($row = $result->fetch(PDO::FETCH_NUM))
-{
+while ($row = $result->fetch(PDO::FETCH_NUM)) {
     echo "<tr>";
-    for ($k=0; $k<4; ++$k)
-        echo "<td>".htmlspecialchars($row[$k])."</td>";
+    for ($k = 0; $k < 4; ++$k) {
+        echo "<td>" . htmlspecialchars($row[$k]) . "</td>";
+    }
     echo "</tr>";
 }
 
@@ -51,7 +50,7 @@ echo "</table>";
 $query = "INSERT INTO cats VALUES(NULL, 'Lion','Leo',4)";
 $result = $pdo->query($query);
 
-echo "The Insert ID was:".$pdo->lastInsertId();
+echo "The Insert ID was:" . $pdo->lastInsertId();
 
 
 echo "<hr>";
@@ -61,11 +60,10 @@ $query = "SELECT * FROM cats";
 $result = $pdo->query($query);
 
 echo "<table><tr><th>Id</th><th>Family</th><th>Name</th><th>Age</th></tr>";
-while ($row = $result->fetch(PDO::FETCH_NUM))
-{
+while ($row = $result->fetch(PDO::FETCH_NUM)) {
     echo "<tr>";
-    for($k=0; $k<4; ++$k ) {
-        echo "<td>".htmlspecialchars($row[$k])."</td>";
+    for ($k = 0; $k < 4; ++$k) {
+        echo "<td>" . htmlspecialchars($row[$k]) . "</td>";
     }
     echo "</tr>";
 }

@@ -1,19 +1,17 @@
 <?php
+
 require_once 'login.php';
 
 try {
     $pdo = new PDO($attr, $user, $pass, $opts);
-}
-catch (PDOException $e)
-{
+} catch (PDOException $e) {
     throw new PDOException($e->getMessage(), (int)$e->getCode());
 }
 
 $query = "SELECT * FROM customers";
 $result = $pdo->query($query);
 
-while ($row = $result->fetch())
-{
+while ($row = $result->fetch()) {
     $custname = htmlspecialchars($row['name']);
     $custisbn = htmlspecialchars($row['isbn']);
 

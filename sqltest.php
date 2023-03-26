@@ -1,33 +1,31 @@
 <?php
+
 require_once 'login.php';
 
 try {
     $pdo = new PDO($attr, $user, $pass, $opts);
-}
-catch (PDOException $e)
-{
+} catch (PDOException $e) {
     throw new PDOException($e->getMessage(), (int)$e->getCode());
 }
-if(isset($_POST['delete']) && isset($_POST['id']))
-{
+
+if (isset($_POST['delete']) && isset($_POST['id'])) {
     $id = get_post($pdo, 'id');
     $query = "DELETE FROM classics WHERE id=$id";
-    $result=$pdo->query($query);
+    $result = $pdo->query($query);
 }
 
 if (isset($_POST['author']) &&
     isset($_POST['title']) &&
     isset($_POST['type']) &&
     isset($_POST['year']) &&
-    isset($_POST['id']))
-{
+    isset($_POST['id'])) {
     $author = get_post($pdo, 'author');
     $title = get_post($pdo, 'title');
     $type = get_post($pdo, 'type');
     $year = get_post($pdo, 'year');
     $id = get_post($pdo, 'id');
 
-    $query = "INSERT INTO classics VALUES".
+    $query = "INSERT INTO classics VALUES" .
         "($author, $title, $type, $year, $id)";
     $result = $pdo->query($query);
 }
@@ -47,13 +45,12 @@ _END;
 $query = "SELECT * FROM classics";
 $result = $pdo->query($query);
 
-while ($row = $result->fetch())
-{
-    $r0 =htmlspecialchars($row['author']);
-    $r1 =htmlspecialchars($row['title']);
-    $r2 =htmlspecialchars($row['type']);
-    $r3 =htmlspecialchars($row['year']);
-    $r4 =htmlspecialchars($row['id']);
+while ($row = $result->fetch()) {
+    $r0 = htmlspecialchars($row['author']);
+    $r1 = htmlspecialchars($row['title']);
+    $r2 = htmlspecialchars($row['type']);
+    $r3 = htmlspecialchars($row['year']);
+    $r4 = htmlspecialchars($row['id']);
 
     echo <<<_END
 <pre>
